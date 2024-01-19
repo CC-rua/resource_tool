@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="jar://$MODULE_DIR$/../lib/mongo-java-driver-3.2.2.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/poi-3.10.1-20140818.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/poi-excelant-3.10.1-20140818.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/poi-ooxml-3.10.1-20140818.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/poi-ooxml-schemas-3.10.1-20140818.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/poi-scratchpad-3.10.1-20140818.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/dom4j-1.6.1.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/xmlbeans-2.6.0.jar!/" />
+    <libelement value="jar://$MODULE_DIR$/../lib/freemarker.jar!/" />
+    <src_description expected_position="0">
+      <src_folder value="file://$MODULE_DIR$" expected_position="0" />
+      <src_folder value="file://$MODULE_DIR$/../test" expected_position="1" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../bin" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/..">
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../test" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="mongo-java-driver-3.2.2.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/mongo-java-driver-3.2.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file:///net/mongo-driver-src.jar" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="poi-3.10.1-20140818.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/poi-3.10.1-20140818.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="poi-excelant-3.10.1-20140818.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/poi-excelant-3.10.1-20140818.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="poi-ooxml-3.10.1-20140818.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/poi-ooxml-3.10.1-20140818.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="poi-ooxml-schemas-3.10.1-20140818.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/poi-ooxml-schemas-3.10.1-20140818.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="poi-scratchpad-3.10.1-20140818.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/poi-scratchpad-3.10.1-20140818.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="dom4j-1.6.1.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/dom4j-1.6.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xmlbeans-2.6.0.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/xmlbeans-2.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="freemarker.jar">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/freemarker.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

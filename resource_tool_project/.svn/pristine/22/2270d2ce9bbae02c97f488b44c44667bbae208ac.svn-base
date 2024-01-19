@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="resource" name="Create Runnable Jar">
+	<target name="resource">
+    	<!-- jar包的输出目录(绝对路径或相对路径) -->
+        <jar destfile="./resource.jar">
+            <manifest>
+                <attribute name="Main-Class" value="com.lehoo.resource.ExcelToJsonAndJava"/>
+                <attribute name="Class-Path" value=". lib/dom4j-1.6.1.jar lib/freemarker.jar lib/mongo-java-driver-3.2.2.jar lib/poi-3.10.1-20140818.jar 
+                    lib/poi-excelant-3.10.1-20140818.jar lib/poi-ooxml-3.10.1-20140818.jar lib/poi-ooxml-schemas-3.10.1-20140818.jar lib/poi-scratchpad-3.10.1-20140818.jar lib/xmlbeans-2.6.0.jar"/>
+            </manifest>
+        	<!-- 源代码生成的class文件目录(绝对路径或相对路径) -->
+            <fileset dir="./bin"/>
+        </jar>
+    </target>
+</project>

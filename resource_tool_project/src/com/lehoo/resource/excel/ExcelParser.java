@@ -1,332 +1,338 @@
 package com.lehoo.resource.excel;
 
-import java.util.*;
-
+import com.lehoo.resource.util.ExcelUtils;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.bson.BasicBSONObject;
 
-import com.lehoo.resource.util.ExcelUtils;
+import java.util.*;
 
 public class ExcelParser {
 
-	public static int NOTE_ROW_NUM   = 0;
-	public static int NAME_ROW_NUM   = 1;
-	public static int INDEX_ROW_NUM  = 1;
-	public static int TYPE_ROW_NUM   = 2;
-	public static int HEAD_ROW_COUNT = 3;
+    public static int NOTE_ROW_NUM = 0;
+    public static int NAME_ROW_NUM = 1;
+    public static int INDEX_ROW_NUM = 1;
+    public static int TYPE_ROW_NUM = 2;
+    public static int HEAD_ROW_COUNT = 3;
 
-	public static HashSet<String> allTypes = new HashSet(){{
-		add("String");
-		add("int");
-		add("boolean");
-		add("short");
-		add("byte");
-		add("long");
-		add("float");
-		add("double");
-		add("int[]");
-		add("short[]");
-		add("long[]");
-		add("byte[]");
-		add("float[]");
-		add("double[]");
-		add("String[]");
-		add("boolean[]");
-		add("int[][]");
-		add("short[][]");
-		add("long[][]");
-		add("byte[][]");
-		add("float[][]");
-		add("double[][]");
-		add("String[][]");
-		add("IDCount");
-		add("IDCount[]");
-		add("IDCount[][]");
-		add("IDIntValue");
-		add("IDIntValue[]");
-		add("IDIntValue[][]");
-		add("IDWeight");
-		add("IDWeight[]");
-		add("IDWeight[][]");
-		add("IDWeightCount");
-		add("IDWeightCount[]");
-		add("IDWeightCount[][]");
-		add("Range");
-		add("Range[]");
-		add("Range[][]");
-		add("RangeWeight");
-		add("RangeWeight[]");
-		add("RangeWeight[][]");
-		add("IDValueValue");
-		add("IDValueValue[]");
-		add("IDValueValue[][]");
-		add("Date");
-	}};
+    public static HashSet<String> allTypes = new HashSet() {{
+        add("String");
+        add("int");
+        add("boolean");
+        add("short");
+        add("byte");
+        add("long");
+        add("float");
+        add("double");
+        add("int[]");
+        add("short[]");
+        add("long[]");
+        add("byte[]");
+        add("float[]");
+        add("double[]");
+        add("String[]");
+        add("boolean[]");
+        add("int[][]");
+        add("short[][]");
+        add("long[][]");
+        add("byte[][]");
+        add("float[][]");
+        add("double[][]");
+        add("String[][]");
+        add("IDCount");
+        add("IDCount[]");
+        add("IDCount[][]");
+        add("IDIntValue");
+        add("IDIntValue[]");
+        add("IDIntValue[][]");
+        add("IDWeight");
+        add("IDWeight[]");
+        add("IDWeight[][]");
+        add("IDWeightCount");
+        add("IDWeightCount[]");
+        add("IDWeightCount[][]");
+        add("Range");
+        add("Range[]");
+        add("Range[][]");
+        add("RangeWeight");
+        add("RangeWeight[]");
+        add("RangeWeight[][]");
+        add("IDValueValue");
+        add("IDValueValue[]");
+        add("IDValueValue[][]");
+        add("Date");
+    }};
 
-	/**
-	 * 注释数组
-	 * @param sheet
-	 * @return
-	 */
-	public static String [] getNotess(Sheet sheet){
-		Row rowType = ExcelUtils.getHead(sheet, NOTE_ROW_NUM);
-		int cols = rowType.getPhysicalNumberOfCells();
-		String [] noteArray = new String[cols];
-		for(int col = 0;col < cols; col++){
-			String value = ExcelUtils.getStrValue(rowType, col);
-			noteArray[col] = value;
-		}
-		return noteArray;
-	}
-	
-	
-	/**
-	 * 名称数组
-	 * @param sheet
-	 * @return
-	 */
-	public static String [] getNames(Sheet sheet){
-		Row rowName = ExcelUtils.getHead(sheet, NAME_ROW_NUM);
-		int cols = rowName.getPhysicalNumberOfCells();
-		String [] nameArray = new String[cols];
-		for(int col = 0;col < cols; col++){
-			String value = ExcelUtils.getStrValue(rowName, col);
-			if(value.contains("-key")){
-				nameArray[col] = value.split("-")[0];
-			}else{
-				nameArray[col] = value;
-			}
-		}
-		return nameArray;
-	}
-	
-	
-	/**
-	 * 索引
-	 * @return
-	 */
+    /**
+     * 注释数组
+     *
+     * @param sheet
+     * @return
+     */
+    public static String[] getNotess(Sheet sheet) {
+        Row rowType = ExcelUtils.getHead(sheet, NOTE_ROW_NUM);
+        int cols = rowType.getPhysicalNumberOfCells();
+        String[] noteArray = new String[cols];
+        for (int col = 0; col < cols; col++) {
+            String value = ExcelUtils.getStrValue(rowType, col);
+            noteArray[col] = value;
+        }
+        return noteArray;
+    }
 
-	public static String [] getIndexs(Sheet sheet){
-		Row rowName = ExcelUtils.getHead(sheet, INDEX_ROW_NUM);
-		int cols = rowName.getPhysicalNumberOfCells();
 
-		List<String> indexs = new ArrayList<>();
-		
-		for(int col = 0;col < cols; col++){
-			String value = ExcelUtils.getStrValue(rowName, col);
-			if(value.contains("-key")){
-				indexs.add(value.split("-")[0]);
-			}
-		}
+    /**
+     * 名称数组
+     *
+     * @param sheet
+     * @return
+     */
+    public static String[] getNames(Sheet sheet) {
+        Row rowName = ExcelUtils.getHead(sheet, NAME_ROW_NUM);
+        int cols = rowName.getPhysicalNumberOfCells();
+        String[] nameArray = new String[cols];
+        for (int col = 0; col < cols; col++) {
+            String value = ExcelUtils.getStrValue(rowName, col);
+            if (value.contains("-key")) {
+                nameArray[col] = value.split("-")[0];
+            } else {
+                nameArray[col] = value;
+            }
+        }
+        return nameArray;
+    }
 
-		return indexs.toArray(new String[0]);
-	}
 
-	/**
-	 * 类型数组
-	 * @param sheet
-	 * @return
-	 */
-	public static String [] getTypes(Sheet sheet){
-		Row rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM);
-		if(rowType == null){
-			rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM+1);
-			if(rowType == null) {
-				return null;
-			}
-		}
+    /**
+     * 索引
+     *
+     * @return
+     */
 
-		int cols = rowType.getPhysicalNumberOfCells();
-		String [] typeArray = new String[cols];
-		for(int col = 0;col < cols; col++){
-			String value = ExcelUtils.getStrValue(rowType, col);
-			if(value.equals("string")){
-				typeArray[col] = "String";
-			} else if(value.equals("bool")){
-				typeArray[col] = "boolean";
-			} else if(value.equals("string[]")){
-				typeArray[col] = "String[]";
-			} else if(value.equals("bool[]")){
-				typeArray[col] = "boolean[]";
-			} else {
-				typeArray[col] = value;
-			}
-		}
-		return typeArray;
-	}
-	
+    public static String[] getIndexs(Sheet sheet) {
+        Row rowName = ExcelUtils.getHead(sheet, INDEX_ROW_NUM);
+        int cols = rowName.getPhysicalNumberOfCells();
 
-	/**
-	 * 解析excel内容
-	 * @param sheet
-	 * @param types
-	 * @return
-	 */
+        List<String> indexs = new ArrayList<>();
 
-	public static Set<BasicBSONObject> parseData(String[] names,String[] types,Sheet sheet){
-		Row[] rows = ExcelUtils.getRows(sheet, HEAD_ROW_COUNT);
-		Set<BasicBSONObject> datas = new LinkedHashSet<>();
-		for(Row row : rows){
-			BasicBSONObject bsonObj = new BasicBSONObject();
-			boolean isEmptyLine = false;
-			for(int col = 0;col < names.length ;col++){
-				Object value = null;
-				try{
-					value = getFileValue(types,row,col);//获取单元格的值
-					
-					//忽略空行
-					if(names[col].equals("sn") && value.equals("")){
-						isEmptyLine = true;
-						break;
-					}
-				}catch(Exception e){
-					e.printStackTrace();
-					System.out.println("Error:sheet:"+sheet.getSheetName()+"  col:"+ col);
-				}
-				
-				if(value instanceof String){
-					String newValue = value.toString();
-					if(isNum(newValue) && newValue.contains(".")){
-						if(newValue.substring(newValue.indexOf(".")+1).equals("0")){
-							newValue = newValue.substring(0,newValue.indexOf("."));
-						}
-					}
-					//科学计数法
-					newValue = ExcelUtils.convertScientific(newValue);
-					bsonObj.append(names[col], newValue);
-				}else{
-					bsonObj.append(names[col], value);
-				}
-			}
-			if(!isEmptyLine){
-				datas.add(bsonObj);
-			}
-		}
-		return datas;
-	}
+        for (int col = 0; col < cols; col++) {
+            String value = ExcelUtils.getStrValue(rowName, col);
+            if (value.contains("-key")) {
+                indexs.add(value.split("-")[0]);
+            }
+        }
 
-	public static Set<BasicBSONObject> parseDataOneSheet(String[] names,String[] types,Sheet sheet){
-		Set<BasicBSONObject> datas = new LinkedHashSet<>();
-		if(sheet.getPhysicalNumberOfRows() < HEAD_ROW_COUNT){
-			return datas;
-		}
-		Row[] rows = ExcelUtils.getRows(sheet, HEAD_ROW_COUNT);
-		for(Row row : rows){
-			BasicBSONObject bsonObj = new BasicBSONObject();
-			boolean isEmptyLine = false;
-			for(int col = 0;col < names.length ;col++){
-				if(types[col].equals("")){
-					continue;
-				}
+        return indexs.toArray(new String[0]);
+    }
 
-				if(!allTypes.contains(types[col])){
-					System.out.println("Error:sheet:" + sheet.getSheetName()+"  col:" + col + "  type:" + types[col]);
-					continue;
-				}
+    /**
+     * 类型数组
+     *
+     * @param sheet
+     * @return
+     */
+    public static String[] getTypes(Sheet sheet) {
+        Row rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM);
+        if (rowType == null) {
+            rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM + 1);
+            if (rowType == null) {
+                return null;
+            }
+        }
 
-				Object value = null;
-				try{
-					value = getFileValue(types,row,col);//获取单元格的值
+        int cols = rowType.getPhysicalNumberOfCells();
+        String[] typeArray = new String[cols];
+        for (int col = 0; col < cols; col++) {
+            String value = ExcelUtils.getStrValue(rowType, col);
+            if (value.equals("string")) {
+                typeArray[col] = "String";
+            } else if (value.equals("bool")) {
+                typeArray[col] = "boolean";
+            } else if (value.equals("string[]")) {
+                typeArray[col] = "String[]";
+            } else if (value.equals("bool[]")) {
+                typeArray[col] = "boolean[]";
+            } else {
+                typeArray[col] = value;
+            }
+        }
+        return typeArray;
+    }
 
-					//忽略空行
-					if(col == 0 && value.equals("")){
-						isEmptyLine = true;
-						break;
-					}
-				} catch(Exception e){
-					e.printStackTrace();
-					System.out.println("Error:sheet:"+sheet.getSheetName()+"  col:"+ col);
-				}
 
-				if(value instanceof String){
-					String newValue = value.toString();
-					if(isNum(newValue) && newValue.contains(".")){
-						if(newValue.substring(newValue.indexOf(".")+1).equals("0")){
-							newValue = newValue.substring(0,newValue.indexOf("."));
-						}
-					}
-					//科学计数法
-					newValue = ExcelUtils.convertScientific(newValue);
-					if(col == 0){
-						bsonObj.append("sn", newValue);
-					} else {
-						bsonObj.append(names[col], newValue);
-					}
-				}else{
-					if(col == 0) {
-						bsonObj.append("sn", value);
-					} else {
-						bsonObj.append(names[col], value);
-					}
-				}
-			}
-			if(!isEmptyLine){
-				datas.add(bsonObj);
-			}
-		}
-		return datas;
-	}
-	
-	/**
-	 * 是否为数字
-	 * @param str
-	 * @return
-	 */
-	private static boolean isNum(String str){
-		return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
-	}
-	
-	/**
-	 * 获得单元格值
-	 * @param types
-	 * @param row
-	 * @param col
-	 * @return
-	 */
-	private static Object getFileValue(String [] types, Row row,int col){
-		Object value = null;
-		switch(types[col]){
-			case "String":{
-				value = ExcelUtils.getStrValue(row, col);
-				break;
-			}
-			case "byte":{
-				value = ExcelUtils.getByteValue(row, col);
-				break;
-			}
-			case "short":{
-				value = ExcelUtils.getShortValue(row, col);
-				break;
-			}
-			case "int":{
-				value = ExcelUtils.getIntValue(row, col);
-				break;
-			}
-			case "long":{
-				value = ExcelUtils.getLongValue(row, col);
-				break;
-			}
-			case "float":{
-				value = ExcelUtils.getFloValue(row, col);
-				break;
-			}
-			case "double":{
-				value = ExcelUtils.getDouValue(row, col);
-				break;
-			}
-			case "boolean":{
-				//value = ExcelUtils.getBoolValue(row, col);
-				String str = ExcelUtils.getStrValue(row, col);
-				value = ((str.equalsIgnoreCase("true") || str.equals("1") || str.equals("1.0")) ? true : false);
-				break;
-			}
-			default:{
-				value = ExcelUtils.getStrValue(row, col);
-			}
-		}
-		return value;
-	}
-	
-	
+    /**
+     * 解析excel内容
+     *
+     * @param sheet
+     * @param types
+     * @return
+     */
+
+    public static Set<BasicBSONObject> parseData(String[] names, String[] types, Sheet sheet) {
+        Row[] rows = ExcelUtils.getRows(sheet, HEAD_ROW_COUNT);
+        Set<BasicBSONObject> datas = new LinkedHashSet<>();
+        for (Row row : rows) {
+            BasicBSONObject bsonObj = new BasicBSONObject();
+            boolean isEmptyLine = false;
+            for (int col = 0; col < names.length; col++) {
+                Object value = null;
+                try {
+                    value = getFileValue(types, row, col);//获取单元格的值
+
+                    //忽略空行
+                    if (names[col].equals("sn") && value.equals("")) {
+                        isEmptyLine = true;
+                        break;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Error:sheet:" + sheet.getSheetName() + "  col:" + col);
+                }
+
+                if (value instanceof String) {
+                    String newValue = value.toString();
+                    if (isNum(newValue) && newValue.contains(".")) {
+                        if (newValue.substring(newValue.indexOf(".") + 1).equals("0")) {
+                            newValue = newValue.substring(0, newValue.indexOf("."));
+                        }
+                    }
+                    //科学计数法
+                    newValue = ExcelUtils.convertScientific(newValue);
+                    bsonObj.append(names[col], newValue);
+                } else {
+                    bsonObj.append(names[col], value);
+                }
+            }
+            if (!isEmptyLine) {
+                datas.add(bsonObj);
+            }
+        }
+        return datas;
+    }
+
+    public static Set<BasicBSONObject> parseDataOneSheet(String[] names, String[] types, Sheet sheet) {
+        Set<BasicBSONObject> datas = new LinkedHashSet<>();
+        if (sheet.getPhysicalNumberOfRows() < HEAD_ROW_COUNT) {
+            return datas;
+        }
+        Row[] rows = ExcelUtils.getRows(sheet, HEAD_ROW_COUNT);
+        for (Row row : rows) {
+            BasicBSONObject bsonObj = new BasicBSONObject();
+            boolean isEmptyLine = false;
+            for (int col = 0; col < names.length; col++) {
+                if (types[col].equals("")) {
+                    continue;
+                }
+
+                if (!allTypes.contains(types[col])) {
+                    System.out.println("Error:sheet:" + sheet.getSheetName() + "  col:" + col + "  type:" + types[col]);
+                    continue;
+                }
+
+                Object value = null;
+                try {
+                    value = getFileValue(types, row, col);//获取单元格的值
+
+                    //忽略空行
+                    if (col == 0 && (value == null || value.equals("") || value.toString().equals("0"))) {
+                        isEmptyLine = true;
+                        break;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    System.out.println("Error:sheet:" + sheet.getSheetName() + "  col:" + col);
+                }
+
+                if (value instanceof String) {
+                    String newValue = value.toString();
+                    if (isNum(newValue) && newValue.contains(".")) {
+                        if (newValue.substring(newValue.indexOf(".") + 1).equals("0")) {
+                            newValue = newValue.substring(0, newValue.indexOf("."));
+                        }
+                    }
+                    //科学计数法
+                    newValue = ExcelUtils.convertScientific(newValue);
+                    if (col == 0) {
+                        bsonObj.append("sn", newValue);
+                    } else {
+                        bsonObj.append(names[col], newValue);
+                    }
+                } else {
+                    if (col == 0) {
+                        bsonObj.append("sn", value);
+                    } else {
+                        bsonObj.append(names[col], value);
+                    }
+                }
+            }
+            if (!isEmptyLine) {
+                datas.add(bsonObj);
+            }
+        }
+        return datas;
+    }
+
+    /**
+     * 是否为数字
+     *
+     * @param str
+     * @return
+     */
+    private static boolean isNum(String str) {
+        return str.matches("^[-+]?(([0-9]+)([.]([0-9]+))?|([.]([0-9]+))?)$");
+    }
+
+    /**
+     * 获得单元格值
+     *
+     * @param types
+     * @param row
+     * @param col
+     * @return
+     */
+    private static Object getFileValue(String[] types, Row row, int col) {
+        Object value = null;
+        switch (types[col]) {
+            case "String": {
+                value = ExcelUtils.getStrValue(row, col);
+                break;
+            }
+            case "byte": {
+                value = ExcelUtils.getByteValue(row, col);
+                break;
+            }
+            case "short": {
+                value = ExcelUtils.getShortValue(row, col);
+                break;
+            }
+            case "int": {
+                value = ExcelUtils.getIntValue(row, col);
+                break;
+            }
+            case "long": {
+                value = ExcelUtils.getLongValue(row, col);
+                break;
+            }
+            case "float": {
+                value = ExcelUtils.getFloValue(row, col);
+                break;
+            }
+            case "double": {
+                value = ExcelUtils.getDouValue(row, col);
+                break;
+            }
+            case "boolean": {
+                //value = ExcelUtils.getBoolValue(row, col);
+                String str = ExcelUtils.getStrValue(row, col);
+                value = ((str.equalsIgnoreCase("true") || str.equals("1") || str.equals("1.0")) ? true : false);
+                break;
+            }
+            default: {
+                value = ExcelUtils.getStrValue(row, col);
+            }
+        }
+        return value;
+    }
+
+
 }

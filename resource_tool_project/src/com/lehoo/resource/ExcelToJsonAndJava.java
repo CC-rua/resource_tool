@@ -4,6 +4,7 @@ import com.lehoo.resource.excel.ExcelParser;
 import com.lehoo.resource.java.GenerateToJava;
 import com.lehoo.resource.json.GenerateToJson;
 import com.lehoo.resource.util.ExcelUtils;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.bson.BasicBSONObject;
@@ -12,6 +13,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.HashSet;
 import java.util.Set;
+
+import static com.lehoo.resource.excel.ExcelParser.NAME_ROW_NUM;
 
 /**
  * 把excel转化成json，存入文件
@@ -63,13 +66,15 @@ public class ExcelToJsonAndJava {
 //					System.out.println("warn:excel:"+excelFile.getName()+" sheetName error. name:"+sheet.getSheetName());
                     continue;
                 }
+                Row rowName = ExcelUtils.getHead(sheet, NAME_ROW_NUM);
+                int cols = rowName.getPhysicalNumberOfCells();
 
                 //注释
-                String[] notes = ExcelParser.getNotess(sheet);
+                String[] notes = ExcelParser.getNotess(sheet, cols);
                 //列名
-                String[] names = ExcelParser.getNames(sheet);
+                String[] names = ExcelParser.getNames(sheet, cols);
                 //索引
-                String[] indexs = ExcelParser.getIndexs(sheet);
+                String[] indexs = ExcelParser.getIndexs(sheet, cols);
 
                 //数据主键名字必须是sn
                 if (!names[0].equals("sn")) {
@@ -77,7 +82,7 @@ public class ExcelToJsonAndJava {
                 }
 
                 //列类型
-                String[] types = ExcelParser.getTypes(sheet);
+                String[] types = ExcelParser.getTypes(sheet, cols);
                 if (names.length != types.length) {
                     throw new Exception("excel error:" + excelFile.getName());
                 }
@@ -140,13 +145,17 @@ public class ExcelToJsonAndJava {
             if (sheetName.toLowerCase().startsWith("sheet") || sheetName.contains("策划") || sheetName.contains("coder")) {
                 throw new Exception("warn:excel:" + excelFile.getName() + " sheetName error. name:" + sheet.getSheetName());
             }
+            //获取字段列数
+            Row rowName = ExcelUtils.getHead(sheet, NAME_ROW_NUM);
+            int cols = rowName.getPhysicalNumberOfCells();
+
             System.out.println("##>" + sheetName);
             //注释
-            String[] notes = ExcelParser.getNotess(sheet);
+            String[] notes = ExcelParser.getNotess(sheet, cols);
             //列名
-            String[] names = ExcelParser.getNames(sheet);
+            String[] names = ExcelParser.getNames(sheet, cols);
             //索引
-            String[] indexs = ExcelParser.getIndexs(sheet);
+            String[] indexs = ExcelParser.getIndexs(sheet, cols);
 
             //数据主键名字必须是sn
 /*			if(!names[0].equals("sn")){
@@ -154,7 +163,7 @@ public class ExcelToJsonAndJava {
 			}*/
 
             //列类型
-            String[] types = ExcelParser.getTypes(sheet);
+            String[] types = ExcelParser.getTypes(sheet, cols);
             if (types == null || types.length == 0 || types[0].isEmpty()) {
                 return;
             }

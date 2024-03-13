@@ -93,6 +93,7 @@
       <workItem from="1705656814044" duration="2053000" />
       <workItem from="1705713469367" duration="16000" />
       <workItem from="1705713988880" duration="9000" />
+      <workItem from="1710294631119" duration="1088000" />
     </task>
     <servers />
   </component>
@@ -101,11 +102,24 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <condition expression="sheet.getSheetName().equals(&quot;RingUpgrade&quot;)" language="JAVA" />
+          <url>file://$PROJECT_DIR$/src/com/lehoo/resource/excel/ExcelParser.java</url>
+          <line>91</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="java-exception">
           <dependency id="0" />
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="sheet.getSheetName()" language="JAVA" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

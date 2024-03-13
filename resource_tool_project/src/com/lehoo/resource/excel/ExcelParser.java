@@ -67,11 +67,11 @@ public class ExcelParser {
      * 注释数组
      *
      * @param sheet
+     * @param cols
      * @return
      */
-    public static String[] getNotess(Sheet sheet) {
+    public static String[] getNotess(Sheet sheet, int cols) {
         Row rowType = ExcelUtils.getHead(sheet, NOTE_ROW_NUM);
-        int cols = rowType.getPhysicalNumberOfCells();
         String[] noteArray = new String[cols];
         for (int col = 0; col < cols; col++) {
             String value = ExcelUtils.getStrValue(rowType, col);
@@ -85,11 +85,11 @@ public class ExcelParser {
      * 名称数组
      *
      * @param sheet
+     * @param cols
      * @return
      */
-    public static String[] getNames(Sheet sheet) {
+    public static String[] getNames(Sheet sheet, int cols) {
         Row rowName = ExcelUtils.getHead(sheet, NAME_ROW_NUM);
-        int cols = rowName.getPhysicalNumberOfCells();
         String[] nameArray = new String[cols];
         for (int col = 0; col < cols; col++) {
             String value = ExcelUtils.getStrValue(rowName, col);
@@ -109,9 +109,8 @@ public class ExcelParser {
      * @return
      */
 
-    public static String[] getIndexs(Sheet sheet) {
+    public static String[] getIndexs(Sheet sheet, int cols) {
         Row rowName = ExcelUtils.getHead(sheet, INDEX_ROW_NUM);
-        int cols = rowName.getPhysicalNumberOfCells();
 
         List<String> indexs = new ArrayList<>();
 
@@ -129,9 +128,10 @@ public class ExcelParser {
      * 类型数组
      *
      * @param sheet
+     * @param cols
      * @return
      */
-    public static String[] getTypes(Sheet sheet) {
+    public static String[] getTypes(Sheet sheet, int cols) {
         Row rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM);
         if (rowType == null) {
             rowType = ExcelUtils.getHead(sheet, TYPE_ROW_NUM + 1);
@@ -140,7 +140,6 @@ public class ExcelParser {
             }
         }
 
-        int cols = rowType.getPhysicalNumberOfCells();
         String[] typeArray = new String[cols];
         for (int col = 0; col < cols; col++) {
             String value = ExcelUtils.getStrValue(rowType, col);
